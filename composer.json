@@ -1,41 +1,22 @@
 {
     "name": "alexandermayer/pop-it-mvc",
-<<<<<<< HEAD
-    "description": "simple MVC",
-=======
     "description": "Simple mvc framework",
->>>>>>> 0e0ddc5 (First prac)
     "type": "project",
     "license": "MIT",
     "authors": [
         {
-<<<<<<< HEAD
-            "name": "gr423_mease",
-=======
             "name": "Alexander Mayer",
->>>>>>> 0e0ddc5 (First prac)
             "email": "sanymini@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "require": {
-<<<<<<< HEAD
-        "php": "^7.4 | ^8.0"
-    },
-    "autoload": {
-        "psr-4": {
-=======
     "php": "^7.4 | ^8.0"
     },
     "autoload": {
     "psr-4": {
->>>>>>> 0e0ddc5 (First prac)
             "Src\\": "core/Src/",
             "": "app/"
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0e0ddc5 (First prac)
 }

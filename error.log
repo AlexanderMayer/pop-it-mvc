@@ -12,11 +12,3 @@
 [Mon Feb 26 18:40:11.395761 2024] [negotiation:error] [pid 3587053] [client 10.30.8.23:40704] AH00687: Negotiation: discovered file(s) matching request: /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/public/index (None could be negotiated).
 [Mon Feb 26 18:40:18.381656 2024] [negotiation:error] [pid 3587053] [client 10.30.8.23:40704] AH00687: Negotiation: discovered file(s) matching request: /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/public/index (None could be negotiated).
 [Mon Feb 26 18:40:18.537133 2024] [negotiation:error] [pid 3587053] [client 10.30.8.23:40704] AH00687: Negotiation: discovered file(s) matching request: /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/public/index (None could be negotiated).
-<<<<<<< HEAD
-[Thu Feb 29 22:01:34.746460 2024] [php:warn] [pid 1035124] [client 10.30.8.25:58692] PHP Warning:  require_once(/srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/../vendor/autoload.php): Failed to open stream: No such file or directory in /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/bootstrap.php on line 6, referer: http://yajgkup-m3.wsr.ru/
-[Thu Feb 29 22:01:37.306582 2024] [php:warn] [pid 1035124] [client 10.30.8.25:58692] PHP Warning:  require_once(/srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/../vendor/autoload.php): Failed to open stream: No such file or directory in /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/bootstrap.php on line 6
-[Thu Feb 29 22:01:41.446911 2024] [php:warn] [pid 1035124] [client 10.30.8.25:58692] PHP Warning:  require_once(/srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/../vendor/autoload.php): Failed to open stream: No such file or directory in /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/bootstrap.php on line 6
-[Thu Feb 29 22:01:50.205362 2024] [php:warn] [pid 1035127] [client 10.30.8.25:56948] PHP Warning:  require_once(/srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/../vendor/autoload.php): Failed to open stream: No such file or directory in /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/bootstrap.php on line 6, referer: http://yajgkup-m3.wsr.ru/
-[Thu Feb 29 22:01:54.087642 2024] [php:warn] [pid 1035127] [client 10.30.8.25:56948] PHP Warning:  require_once(/srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/../vendor/autoload.php): Failed to open stream: No such file or directory in /srv/users/kbxtndav/yajgkup-m3/pop-it-mvc/core/bootstrap.php on line 6
-=======
->>>>>>> 0e0ddc5 (First prac)
