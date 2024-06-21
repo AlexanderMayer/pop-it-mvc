@@ -33,14 +33,14 @@ class Site
     {
        //Если просто обращение к странице, то отобразить форму
        if ($request->method === 'GET') {
-           return new View('site.login');
+           return new View('mysite.login');
        }
        //Если удалось аутентифицировать пользователя, то редирект
        if (Auth::attempt($request->all())) {
            app()->route->redirect('/hello');
        }
        //Если аутентификация не удалась, то сообщение об ошибке
-       return new View('site.login', ['message' => 'Неправильные логин или пароль']);
+       return new View('mysite.login', ['message' => 'Неправильные логин или пароль']);
     }
 
     public function logout(): void
@@ -49,4 +49,8 @@ class Site
        app()->route->redirect('/hello');
     }
 
+    public function indexSisAdm(): string
+     {
+        return (new View())->render('mysite.index');
+     }
 }
