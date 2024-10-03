@@ -93,16 +93,15 @@ class Site
     public function userPhones(Request $request): string
     {
         $employees = Employee::all();
-        $phones = Phone::all();
         if ($request->method === 'POST') {
             $data = $request->all();
-            User_phone::create([
-                'employees' => $data['employees'],
-                'phone' => $data['phone'],
-            ]);
-            return new View('mysite.userPhones', ['employees' => $employees, 'phones' => $phones]);
+            $phones = User_phone::where('employees', $data['employees'])->pluck('phone');
+            $number = Phone::whereIn('phone_id', $phones)->pluck('number');
+            return new View('mysite.userPhones', ['employees' => $employees, 'phones' => $number]);
+        } else {
+            $number = '';
         }
-        return (new View())->render('mysite.userPhones', ['employees' => $employees, 'phones' => $phones]);
+        return (new View())->render('mysite.userPhones', ['employees' => $employees, 'phones' => $number]);
     }
 
     public function departmentPhone(Request $request): string

@@ -23,11 +23,11 @@
     <div>
         <p>Номера:</p>
     </div>
-    <?php foreach ($phones as $el) ?>
+    <?php foreach ($phones as $el): ?>
         <div>
-        <p><?= $el->number; ?></p>
+        <p><?= $el; ?></p>
     </div>
-    <?php ?>
+    <?php endforeach; ?>
 
 <?php else: app()->route->redirect('/login');
 endif;

@@ -1,3 +1,4 @@
+<p class="title">Добавить нового сотрудника</p>
 <?php
 if (app()->auth::check()):
     ?>
