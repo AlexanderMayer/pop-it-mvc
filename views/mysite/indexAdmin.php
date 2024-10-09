@@ -2,6 +2,7 @@
 <?php
 if (app()->auth::check()):
     ?>
+    <h3><?= $message ?? ''; ?></h3>
     <div>
         <form method="POST">
             <p>Имя <input type="text" name="name"></p>

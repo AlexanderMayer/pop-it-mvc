@@ -57,7 +57,7 @@ class Site
                 'role' => 2,
             ]);
         }
-        return Redirect::to('/indexAdmin');
+        return new View('mysite.indexAdmin', ['message' => 'Системный администратор добавлен']);
     }
 
     public function addNewUser(Request $request): string
