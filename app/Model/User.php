@@ -11,7 +11,7 @@ class User extends Model implements IdentityInterface
    use HasFactory;
 
    public $timestamps = false;
-   protected $table = 'user';
+   protected $table = 'users';
    protected $guarded = [];
 
    protected static function booted()

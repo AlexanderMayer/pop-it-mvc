@@ -11,10 +11,10 @@
         </form>
     </div>
     <div>
-        <form action="" method="POST">
-            <select name="department">
-                <?php foreach ($departments as $el): ?>
-                    <option value="<?= $el->department_id; ?>"><?= $el->name ?></option>
+        <form action="" method="GET">
+            <select name="employee">
+                <?php foreach ($employees as $el): ?>
+                    <option value="<?= $el->user_id; ?>"><?= $el->name . ' ' . $el->lastname . ' ' . $el->surname; ?></option>
                 <?php endforeach; ?>
             </select>
             <input type="submit" value="Выбрать абонента">
@@ -23,11 +23,11 @@
     <div>
         <p>Номера:</p>
     </div>
-    <?php foreach ($phones as $el): ?>
-        <div>
-        <p><?= $el; ?></p>
-    </div>
-    <?php endforeach; ?>
+        <?php foreach ($phones as $el): ?>
+            <div>
+                <p><?= $el; ?></p>
+            </div>
+        <?php endforeach; ?>
 
 <?php else: app()->route->redirect('/login');
 endif;

@@ -62,7 +62,7 @@ class Site
 
     public function addNewUser(Request $request): string
     {
-        $departments = Department::all();
+        $rooms = Room::all();
         if ($request->method === 'POST') {
             $data = $request->all();
             Employee::create([
@@ -70,11 +70,11 @@ class Site
                 'lastname' => $data['lastname'],
                 'surname' => $data['surname'],
                 'birthday' => $data['birthday'],
-                'department' => $data['department'],
+                'room_id' => $data['room_id'],
             ]);
-            return new View('mysite.addnewuser', ['message' => 'Абонент добавлен', 'departments' => $departments]);
+            return new View('mysite.addnewuser', ['message' => 'Абонент добавлен', 'rooms' => $rooms]);
         }
-        return (new View())->render('mysite.addnewuser', ['departments' => $departments]);
+        return (new View())->render('mysite.addnewuser', ['rooms' => $rooms]);
     }
 
     public function users(Request $request): string
@@ -82,12 +82,21 @@ class Site
         $departments = Department::all();
         $selectedDepartments = $request->all();
         if ($request->method === 'POST') {
-            $employees = Employee::whereIn('department', $selectedDepartments)->get();
+            $selectedRooms = Room::where('department', $selectedDepartments['department_id'])->pluck('room_id');
+            $employees = Employee::whereIn('room_id', $selectedRooms)->get();
+            $employees_count = count($employees);
+            return (new View('mysite.users', [
+                'departments' => $departments,
+                'employees_count' => $employees_count
+            ]));
         } else {
             $employees = Employee::all();
         };
         $employees_count = count($employees);
-        return (new View())->render('mysite.users', ['departments' => $departments, 'employees_count' => $employees_count]);
+        return (new View())->render('mysite.users', [
+            'departments' => $departments,
+            'employees_count' => $employees_count
+        ]);
     }
 
     public function userPhones(Request $request): string
@@ -97,45 +106,95 @@ class Site
             $data = $request->all();
             $phones = User_phone::where('employees', $data['employees'])->pluck('phone');
             $number = Phone::whereIn('phone_id', $phones)->pluck('number');
-            return new View('mysite.userPhones', ['employees' => $employees, 'phones' => $number]);
+            return new View('mysite.userPhones', [
+                'employees' => $employees,
+                'phones' => $number
+            ]);
         } else {
             $number = '';
         }
-        return (new View())->render('mysite.userPhones', ['employees' => $employees, 'phones' => $number]);
+        return (new View())->render('mysite.userPhones', [
+            'employees' => $employees,
+            'phones' => $number
+        ]);
     }
+
 
     public function departmentPhone(Request $request): string
     {
-        return (new View())->render('mysite.departmentPhone');
+        $departments = Department::all();
+        $selectedDepartments = $request->all();
+
+        if ($request->method === 'POST') {
+            $selectedRooms = Room::where('department', $selectedDepartments['department'])->pluck('room_id');
+            $employees = Employee::whereIn('room_id', $selectedRooms)->get();
+            return (new View('mysite.departmentPhone', [
+                'departments' => $departments,
+                'employees' => $employees,
+                'phones' => []
+            ]));
+        } elseif ($request->method === 'GET') {
+            if (isset($selectedDepartments['employee'])) {
+                $phones = User_phone::where('employees', $selectedDepartments['employee'])->pluck('phone');
+                $number = Phone::whereIn('phone_id', $phones)->pluck('number');
+            } else {
+                $number = [];
+            }
+            return (new View('mysite.departmentPhone', [
+                'departments' => $departments,
+                'employees' => [],
+                'phones' => $number
+            ]));
+        }
+
+        return (new View())->render('mysite.departmentPhone', [
+            'departments' => $departments,
+            'employees' => '',
+            'phones' => []
+        ]);
     }
+
+
     public function addUserPhone(Request $request): string
     {
         $employees = Employee::all();
         $phones = Phone::all();
-        if ($request->method === 'POST'){
+        if ($request->method === 'POST') {
             $data = $request->all();
             User_phone::create([
                 'employees' => $data['employees'],
                 'phone' => $data['phone'],
             ]);
-            return new View('mysite.addUserPhone', ['message' => 'Телефон привязан к пользователю', 'employees' => $employees, 'phones' => $phones]);
+            return new View('mysite.addUserPhone', [
+                'message' => 'Телефон привязан к пользователю',
+                'employees' => $employees,
+                'phones' => $phones
+            ]);
         }
-        return (new View())->render('mysite.addUserPhone', ['employees' => $employees, 'phones' => $phones]);
+        return (new View())->render('mysite.addUserPhone', [
+            'employees' => $employees,
+            'phones' => $phones
+        ]);
     }
+
     public function addNewRoom(Request $request): string
     {
         $departments = Department::all();
-        if ($request->method === 'POST'){
+        if ($request->method === 'POST') {
             $data = $request->all();
             Room::create([
                 'number' => $data['number'],
                 'type' => $data['type'],
                 'department' => $data['department'],
             ]);
-            return new View('mysite.addNewRoom', ['message' => 'Комната добавлена', 'departments' => $departments]);
+            return new View('mysite.addNewRoom', [
+                'message' => 'Комната добавлена',
+                'departments' => $departments
+            ]);
         }
         return (new View())->render('mysite.addNewRoom', ['departments' => $departments]);
     }
+
     public function addNewPhone(Request $request): string
     {
         $rooms = Room::all();
@@ -145,14 +204,17 @@ class Site
                 'number' => $data['number'],
                 'room' => $data['room'],
             ]);
-            return new View('mysite.addNewPhone', ['message' => 'Телефон добавлен', 'rooms' => $rooms]);
+            return new View('mysite.addNewPhone', [
+                'message' => 'Телефон добавлен',
+                'rooms' => $rooms
+            ]);
         }
         return (new View())->render('mysite.addNewPhone', ['rooms' => $rooms]);
     }
 
     public function addNewDepartment(Request $request): string
     {
-        if ($request->method === 'POST'){
+        if ($request->method === 'POST') {
             $data = $request->all();
             Department::create([
                 'name' => $data['name'],

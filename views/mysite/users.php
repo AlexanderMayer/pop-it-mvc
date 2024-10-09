@@ -2,7 +2,7 @@
 
     <div>
         <form action="" method="POST">
-            <select name="department">
+            <select name="department_id">
                 <?php foreach ($departments as $el): ?>
                     <option value="<?= $el->department_id; ?>"><?= $el->name?></option>
                 <?php endforeach; ?>
